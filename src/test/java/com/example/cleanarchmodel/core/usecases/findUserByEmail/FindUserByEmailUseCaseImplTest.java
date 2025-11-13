@@ -1,7 +1,7 @@
 package com.example.cleanarchmodel.core.usecases.findUserByEmail;
 
 import com.example.cleanarchmodel.core.domain.user.User;
-import com.example.cleanarchmodel.core.domain.user.UserResponseDTO;
+import com.example.cleanarchmodel.core.domain.user.UserResult;
 import com.example.cleanarchmodel.core.exceptions.UserNotFoundException;
 import com.example.cleanarchmodel.core.repositories.UserRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -33,12 +33,12 @@ class FindUserByEmailUseCaseImplTest {
 
         when(this.userRepository.getByEmail("testuser@email.com")).thenReturn(Optional.of(user));
 
-        UserResponseDTO userResponse = this.findUserByEmailUseCase.execute(user.getEmail());
+        UserResult userResult = this.findUserByEmailUseCase.execute(user.getEmail());
 
         verify(userRepository, times(1)).getByEmail(any(String.class));
-        assertEquals(userResponse.firstName(), user.getFirstName());
-        assertEquals(userResponse.lastName(), user.getLastName());
-        assertEquals(userResponse.email(), user.getEmail());
+        assertEquals(userResult.firstName(), user.getFirstName());
+        assertEquals(userResult.lastName(), user.getLastName());
+        assertEquals(userResult.email(), user.getEmail());
     }
 
     @Test

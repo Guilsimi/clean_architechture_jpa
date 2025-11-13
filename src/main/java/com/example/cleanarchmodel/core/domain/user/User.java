@@ -17,12 +17,12 @@ public class User {
         this.password = password;
     }
 
-    public User(UserRequestDTO userRequestDTO) {
+    public User(String firstName, String lastName, String email, String password) {
         this.id = null;
-        this.firstName = userRequestDTO.firstName();
-        this.lastName = userRequestDTO.lastName();
-        this.email = userRequestDTO.email();
-        this.password = userRequestDTO.password();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
     }
 
     public User() {
@@ -69,15 +69,15 @@ public class User {
         this.password = password;
     }
 
-    public void updateData(UserUpdateData newData) {
-        if (newData.firstName() != null) {
-            this.firstName = newData.firstName();
+    public void updateData(String firstName, String lastName, String password) {
+        if (firstName != null) {
+            this.firstName = firstName;
         }
-        if (newData.lastName() != null) {
-            this.lastName = newData.lastName();
+        if (lastName != null) {
+            this.lastName = lastName;
         }
-        if (newData.password() != null) {
-            this.password = newData.password();
+        if (password != null) {
+            this.password = password;
         }
     }
 }

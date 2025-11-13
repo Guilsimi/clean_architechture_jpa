@@ -1,9 +1,9 @@
 package com.example.cleanarchmodel.core.usecases.findUserByEmail;
 
-import com.example.cleanarchmodel.core.domain.user.UserResponseDTO;
+import com.example.cleanarchmodel.core.domain.user.UserResult;
 
 public interface FindUserByEmailUseCase {
 
-    UserResponseDTO execute(String email);
+    UserResult execute(String email);
 
 }

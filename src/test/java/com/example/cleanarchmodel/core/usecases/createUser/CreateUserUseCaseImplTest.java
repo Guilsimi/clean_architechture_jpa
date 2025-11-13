@@ -1,7 +1,7 @@
 package com.example.cleanarchmodel.core.usecases.createUser;
 
 import com.example.cleanarchmodel.core.domain.user.User;
-import com.example.cleanarchmodel.core.domain.user.UserRequestDTO;
+import com.example.cleanarchmodel.core.domain.user.CreateUserCommand;
 import com.example.cleanarchmodel.core.exceptions.UserAlreadyExistsException;
 import com.example.cleanarchmodel.core.exceptions.UserOperationException;
 import com.example.cleanarchmodel.core.repositories.UserRepository;
@@ -31,9 +31,9 @@ class CreateUserUseCaseImplTest {
     @DisplayName("Create a user when all datas is valid")
     void createUserSuccessfully() {
         UUID randomId = UUID.randomUUID();
-        UserRequestDTO userObject = new UserRequestDTO("User", "Test", "usertest@email.com", "password123");
+        CreateUserCommand createUserCommand = new CreateUserCommand("User", "Test", "usertest@email.com", "password123");
 
-        this.createUserUseCase.execute(userObject);
+        this.createUserUseCase.execute(createUserCommand);
 
         verify(this.userRepository, times(1)).existsByEmail(any(String.class));
         verify(this.userRepository, times(1)).save(any(User.class));
@@ -43,11 +43,11 @@ class CreateUserUseCaseImplTest {
     @Test
     @DisplayName("Throw error when user email exists in db")
     void throwErrorWhenUserEmailAlreadyExists() {
-        UserRequestDTO userObject = new UserRequestDTO("User", "Test", "usertest@email.com", "password123");
+        CreateUserCommand createUserCommand = new CreateUserCommand("User", "Test", "usertest@email.com", "password123");
         when(this.userRepository.existsByEmail(any(String.class))).thenReturn(true);
 
         RuntimeException exception = assertThrows(UserAlreadyExistsException.class, () -> {
-            this.createUserUseCase.execute(userObject);
+            this.createUserUseCase.execute(createUserCommand);
         });
 
         verify(this.userRepository, times(1)).existsByEmail(any(String.class));
@@ -59,11 +59,11 @@ class CreateUserUseCaseImplTest {
     @Test
     @DisplayName("Throw error when user password is less than 8 characters")
     void throwErrorWhenUserPasswordIsLessThan8Characters() {
-        UserRequestDTO userObject = new UserRequestDTO("User", "Test", "usertest@email.com", "pass");
+        CreateUserCommand createUserCommand = new CreateUserCommand("User", "Test", "usertest@email.com", "pass");
         when(this.userRepository.existsByEmail(any(String.class))).thenReturn(false);
 
         RuntimeException exception = assertThrows(UserOperationException.class, () -> {
-            this.createUserUseCase.execute(userObject);
+            this.createUserUseCase.execute(createUserCommand);
         });
 
         assertEquals("Password must be at least 8 characters long and at most 25 characters long.", exception.getMessage());
@@ -72,11 +72,11 @@ class CreateUserUseCaseImplTest {
     @Test
     @DisplayName("Throw error when user email is invalid")
     void throwErrorWhenUserEmailIsInvalid() {
-        UserRequestDTO userObject = new UserRequestDTO("User", "Test", "usertestemailcom", "password123");
+        CreateUserCommand createUserCommand = new CreateUserCommand("User", "Test", "usertestemailcom", "password123");
         when(this.userRepository.existsByEmail(any(String.class))).thenReturn(false);
 
         RuntimeException exception = assertThrows(UserOperationException.class, () -> {
-            this.createUserUseCase.execute(userObject);
+            this.createUserUseCase.execute(createUserCommand);
         });
 
         assertEquals("Email must be valid.", exception.getMessage());

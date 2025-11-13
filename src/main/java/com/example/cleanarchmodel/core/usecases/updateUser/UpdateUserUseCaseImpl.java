@@ -1,7 +1,7 @@
 package com.example.cleanarchmodel.core.usecases.updateUser;
 
 import com.example.cleanarchmodel.core.domain.user.User;
-import com.example.cleanarchmodel.core.domain.user.UserUpdateData;
+import com.example.cleanarchmodel.core.domain.user.UpdateUserCommand;
 import com.example.cleanarchmodel.core.exceptions.UserNotFoundException;
 import com.example.cleanarchmodel.core.repositories.UserRepository;
 
@@ -16,9 +16,9 @@ public class UpdateUserUseCaseImpl implements UpdateUserUseCase {
     }
 
     @Override
-    public void execute(UUID userId, UserUpdateData newData) {
+    public void execute(UUID userId, UpdateUserCommand newData) {
             User user = this.getUserById(userId);
-            user.updateData(newData);
+            user.updateData(newData.firstName(), newData.lastName(), newData.password());
             userRepository.update(user);
     }
 

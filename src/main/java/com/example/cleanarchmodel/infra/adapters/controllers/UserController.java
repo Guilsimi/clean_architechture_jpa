@@ -1,8 +1,8 @@
 package com.example.cleanarchmodel.infra.adapters.controllers;
 
-import com.example.cleanarchmodel.core.domain.user.UserRequestDTO;
-import com.example.cleanarchmodel.core.domain.user.UserResponseDTO;
-import com.example.cleanarchmodel.core.domain.user.UserUpdateData;
+import com.example.cleanarchmodel.core.domain.user.CreateUserCommand;
+import com.example.cleanarchmodel.core.domain.user.UserResult;
+import com.example.cleanarchmodel.core.domain.user.UpdateUserCommand;
 import com.example.cleanarchmodel.core.usecases.createUser.CreateUserUseCase;
 import com.example.cleanarchmodel.core.usecases.deleteUser.DeleteUserByIdUseCase;
 import com.example.cleanarchmodel.core.usecases.findUserByEmail.FindUserByEmailUseCase;
@@ -33,7 +33,7 @@ public class UserController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createNewUser(@RequestBody UserRequestDTO requestDTO) {
+    public void createNewUser(@RequestBody CreateUserCommand requestDTO) {
         this.createUserUseCase.execute(requestDTO);
     }
 
@@ -45,13 +45,13 @@ public class UserController {
 
     @GetMapping("/get")
     @ResponseStatus(HttpStatus.OK)
-    public UserResponseDTO getUserByEmail(@RequestParam String email) {
+    public UserResult getUserByEmail(@RequestParam String email) {
         return this.findUserByEmailUseCase.execute(email);
     }
 
     @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateUserUsingId(@PathVariable UUID id, @RequestBody UserUpdateData userNewData) {
+    public void updateUserUsingId(@PathVariable UUID id, @RequestBody UpdateUserCommand userNewData) {
         this.updateUserUseCase.execute(id, userNewData);
     }
 }

@@ -1,9 +1,9 @@
 package com.example.cleanarchmodel.core.usecases.createUser;
 
-import com.example.cleanarchmodel.core.domain.user.UserRequestDTO;
+import com.example.cleanarchmodel.core.domain.user.CreateUserCommand;
 
 public interface CreateUserUseCase {
 
-    void execute(UserRequestDTO userDto);
+    void execute(CreateUserCommand createUserCommand);
 
 }

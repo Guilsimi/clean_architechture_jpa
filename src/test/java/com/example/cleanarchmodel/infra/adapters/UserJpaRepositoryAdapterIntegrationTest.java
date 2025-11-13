@@ -1,8 +1,7 @@
 package com.example.cleanarchmodel.infra.adapters;
 
 import com.example.cleanarchmodel.core.domain.user.User;
-import com.example.cleanarchmodel.core.domain.user.UserUpdateData;
-import com.example.cleanarchmodel.core.exceptions.UserAlreadyExistsException;
+import com.example.cleanarchmodel.core.domain.user.UpdateUserCommand;
 import com.example.cleanarchmodel.core.exceptions.UserOperationException;
 import com.example.cleanarchmodel.infra.adapters.repositoriesAdapters.UserJpaRepositoryAdapter;
 import com.example.cleanarchmodel.infra.mappers.UserMapper;
@@ -97,8 +96,8 @@ class UserJpaRepositoryAdapterIntegrationTest {
                 .map(userMapper::toDomain);
         assertTrue(existingUser.isPresent());
 
-        UserUpdateData newData = new UserUpdateData("UpdatedName", "UpdatedLastName", null);
-        existingUser.get().updateData(newData);
+        UpdateUserCommand updateUserCommand = new UpdateUserCommand("UpdatedName", "UpdatedLastName", null);
+        existingUser.get().updateData(updateUserCommand.firstName(), updateUserCommand.lastName(), updateUserCommand.password());
         this.userJpaRepositoryAdapter.update(existingUser.get());
 
         Optional<User> updatedUser = userJpaRepository.findByEmail(existingUser.get().getEmail()).map(userMapper::toDomain);
