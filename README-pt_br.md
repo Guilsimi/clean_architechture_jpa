@@ -8,6 +8,13 @@ Esse projeto tem como objetivo demonstrar a implementação do **JPA** (_Java Pe
 A **Arquitetura Limpa** promove a **separação de responsabilidades** do código utilizando **camadas**, facilitando a manutenção, escalabilidade e testabilidade do sistema, protegendo e isolando as **regras de negócios** da aplicação dos detalhes externos.<br>
 A biblioteca **JPA** é utilizada para gerenciar a persistência de dados em aplicações Java, permitindo o mapeamento entre objetos Java e tabelas de banco de dados relacionais, ela foi escolhida por ser uma biblioteca amplamente utilizada em projetos Java.
 
+## Arquitetura da Aplicação
+
+---
+<div style="text-align: center;">
+<img alt="arquitetura_da_aplicação" width="600" src="docs/application_architecture.png">
+</div>
+
 ## Tecnologias
 
 ---

@@ -8,6 +8,13 @@ This project aims to demonstrate the implementation of **JPA** (_Java Persistenc
 **Clean Architecture** promotes **separation of concerns** in code using **layers**, facilitating maintenance, scalability, and testability of the system, protecting and isolating the application's **business rules** from external details.<br>
 The **JPA** library is used to manage data persistence in Java applications, allowing mapping between Java objects and relational database tables. It was chosen for being a widely used library in Java projects.
 
+## Application Architecture
+
+---
+<div style="text-align: center;">
+<img alt="application_architecture" width="600" src="docs/application_architecture.png">
+</div>
+
 ## Tecnologies
 
 ---
