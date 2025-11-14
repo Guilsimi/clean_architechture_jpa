@@ -1,4 +1,4 @@
-[Ler em português](#-português)
+[Ler em português](README-pt_br.md)
 
 ## 🇺🇸 English
 # JPA with Clean Architecture

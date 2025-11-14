@@ -1,4 +1,4 @@
-[Read in English](#-english)
+[Read in English](README.md)
 
 ## 🇧🇷 Português
 # JPA com Arquitetura Limpa
